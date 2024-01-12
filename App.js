@@ -7,7 +7,8 @@ import Button from './components/Button';
 import ImageViewer from './components/ImageViewer';
 
 const PlaceholderImage = require('./assets/images/background-image.png');
-
+import CircleButton from './components/CircleButton';
+import IconButton from './components/IconButton';
 export default function App() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [showAppOptions,setShowAppOptions] = useState(false)
@@ -27,16 +28,45 @@ console.log(result);
     }
   };
 
+  const onReset = () => {
+    setShowAppOptions(false);
+  };
+
+  const onAddSticker = () => {
+    // we will implement this later
+  };
+
+  const onSaveImageAsync = async () => {
+    // we will implement this later
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
         <ImageViewer placeholderImageSource={PlaceholderImage} selectedImage={selectedImage} />
       </View>
-      <View style={styles.footerContainer}>
-        <Button theme="primary" label="Choose a photo" onPress={pickImageAsync} />
-        <Button label="Use this photo" onPress={() => setShowAppOptions(true)} />
+      {showAppOptions ? (
+        <View style={styles.optionContainer}>
+          <View style ={styles.optionRow}>
+          <IconButton icon="refresh" label="Reset" onPress={onReset} />
+            <CircleButton onPress={onAddSticker} />
+            <IconButton icon="save-alt" label="Save" onPress={onSaveImageAsync} />
+          
+            
+             </View>
+           </View>
+      ):
+        
+        
+        
+        <View style={styles.footerContainer}>
 
-      </View>
+<Button theme="primary" label="Choose a photo" onPress={pickImageAsync} />
+<Button label="Use this photo" onPress={() => setShowAppOptions(true)} />
+
+</View>
+        }
+    
       <StatusBar style="auto" />
     </View>
   );
